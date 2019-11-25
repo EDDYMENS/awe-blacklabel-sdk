@@ -190,8 +190,8 @@ class SDK
      * @param  string  $containerId
      * @param  string  (optional) $primaryButtonBg
      * @param  string  (optional) $primaryButtonColor
-     * @param  string (optional) $inputBg
-     * @param  string (optional) $inputColor
+     * @param  string  (optional) $inputBg
+     * @param  string  (optional) $inputColor
      * @return array
      */
     public function getChatScript($performerName, $containerId, $primaryButtonBg = null, $primaryButtonColor = null, $inputBg = null, $inputColor = null)

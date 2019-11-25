@@ -1,0 +1,24 @@
+{
+    "name": "awe/blacklabel",
+    "description": "awe blacklabel PHP SDK",
+    "keywords": ["AWE", "LiveJasmin", "blacklabel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edmond Mensah",
+            "email": "edmond.mensah@doclerholding.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=7.1"
+    },
+    "require-dev": {
+		"phpunit/phpunit": "6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Awe\\Blacklabel\\": "src/"
+        }
+    }
+}

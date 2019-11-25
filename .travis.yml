@@ -1,0 +1,2 @@
+language: php 
+script: ./vendor/phpunit/phpunit/phpunit tests/test.php

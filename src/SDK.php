@@ -2,16 +2,22 @@
 
 namespace Awe\Blacklabel;
 
+/**
+* PHP SDK for working with the blacklabel API
+*
+* @package    awe/blacklabel
+* @author     eddymens <edmond.mensah@doclerholding.com>
+* @version    v0.1
+* 
+*/
 class SDK
 {
     private $applicationSecret;
     private $clientIP;
     private $userAgent;
-    private $whiteLabel;
     private $language;
     private $sessionId;
-    private $debug;
-
+    
     public function __construct($config)
     {
         if (!isset($config['applicationSecret'], $config['userAgent'], $config['clientIP'], $config['whiteLabelURL'])) {
@@ -209,9 +215,7 @@ class SDK
      */
     public function getChatScript($performerName, $containerId, $primaryButtonBg = null, $primaryButtonColor = null, $inputBg = null, $inputColor = null)
     {
-        $params = ['performerNick' => $performerName, 'containerId' => $containerId, 'session' => $sessionId,
-
-        ];
+        $params = ['performerNick' => $performerName, 'containerId' => $containerId];
 
         return $this->requestProcessor('scripts/chat', 'GET', $params);
     }
@@ -260,7 +264,18 @@ class SDK
         $memberRoute = ($userType == 'm') ? '/member' : '';
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
-        curl_setopt_array($curl, [CURLOPT_URL => $URL, CURLOPT_RETURNTRANSFER => true, CURLOPT_ENCODING => '', CURLOPT_MAXREDIRS => 10, CURLOPT_TIMEOUT => 30, CURLOPT_POSTFIELDS => json_encode($params), CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, CURLOPT_CUSTOMREQUEST => strtoupper($method), CURLOPT_HTTPHEADER => $headers, CURLOPT_HEADER => 1]);
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $URL, 
+            CURLOPT_RETURNTRANSFER => true, 
+            CURLOPT_ENCODING => '', 
+            CURLOPT_MAXREDIRS => 10, 
+            CURLOPT_TIMEOUT => 30, 
+            CURLOPT_POSTFIELDS => json_encode($params), 
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
+            CURLOPT_CUSTOMREQUEST => strtoupper($method), 
+            CURLOPT_HTTPHEADER => $headers, 
+            CURLOPT_HEADER => 1]
+        );
         $response = curl_exec($curl);
         list($headers, $payload) = explode("\r\n\r\n", $response, 2);
         $err = curl_error($curl);

@@ -21,7 +21,6 @@
 namespace Awe\Blacklabel;
 
 error_reporting(E_ALL);
-ini_set('display_errors', 'On');
 require_once 'vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
@@ -137,14 +136,14 @@ class test extends TestCase
         return $this->assertArrayHasKey('userType', $output['data']);
     }
 
-    public function testUpdateUser()
-    {
-        $this
-            ->SDKInstance
-            ->setSession('session ID goes here');
-        $output = $this
-            ->SDKInstance
-            ->updateUser(['partnerUserId' => '8689', 'displayName' => 'John Doe', 'email' => 'test@test.com']);
-        // return $this->assertArrayHasKey("userType", $output);
-    }
+    // public function testUpdateUser()
+    // {
+    //     $this
+    //         ->SDKInstance
+    //         ->setSession('session ID goes here');
+    //     $this
+    //         ->SDKInstance
+    //         ->updateUser(['partnerUserId' => '8689', 'displayName' => 'John Doe', 'email' => 'test@test.com']);
+    //     return $this->assertArrayHasKey("userType", $output);
+    // }
 }

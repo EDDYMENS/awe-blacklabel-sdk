@@ -3,13 +3,12 @@
 namespace Awe\Blacklabel;
 
 /**
-* PHP SDK for working with the blacklabel API
-*
-* @package    awe/blacklabel
-* @author     eddymens <edmond.mensah@doclerholding.com>
-* @version    v0.1
-* 
-*/
+ * PHP SDK for working with the blacklabel API.
+ *
+ * @author     eddymens <edmond.mensah@doclerholding.com>
+ *
+ * @version    v0.1
+ */
 class SDK
 {
     private $applicationSecret;
@@ -17,7 +16,7 @@ class SDK
     private $userAgent;
     private $language;
     private $sessionId;
-    
+
     public function __construct($config)
     {
         if (!isset($config['applicationSecret'], $config['userAgent'], $config['clientIP'], $config['whiteLabelURL'])) {
@@ -265,16 +264,16 @@ class SDK
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
         curl_setopt_array($curl, [
-            CURLOPT_URL => $URL, 
-            CURLOPT_RETURNTRANSFER => true, 
-            CURLOPT_ENCODING => '', 
-            CURLOPT_MAXREDIRS => 10, 
-            CURLOPT_TIMEOUT => 30, 
-            CURLOPT_POSTFIELDS => json_encode($params), 
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
-            CURLOPT_CUSTOMREQUEST => strtoupper($method), 
-            CURLOPT_HTTPHEADER => $headers, 
-            CURLOPT_HEADER => 1]
+            CURLOPT_URL            => $URL,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => '',
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_POSTFIELDS     => json_encode($params),
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => strtoupper($method),
+            CURLOPT_HTTPHEADER     => $headers,
+            CURLOPT_HEADER         => 1, ]
         );
         $response = curl_exec($curl);
         list($headers, $payload) = explode("\r\n\r\n", $response, 2);
@@ -282,13 +281,13 @@ class SDK
 
         if ($err) {
             throw new \Exception('Unable to perform CURL request '.$err);
-        } 
+        }
         $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
         $responseObj = json_decode($payload, true);
         $responseObj['sessionId'] = $sessionId;
 
         return $responseObj;
-        
+
         curl_close($curl);
     }
 }

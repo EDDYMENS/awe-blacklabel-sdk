@@ -1,6 +1,8 @@
 # AWE PHP SDK
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/989042d96d2b42b28d98c0c098bceeef)](https://app.codacy.com/app/EDDYMENS/awe-html-kit?utm_source=github.com&utm_medium=referral&utm_content=EDDYMENS/awe-html-kit&utm_campaign=Badge_Grade_Dashboard)[![StyleCI](https://github.styleci.io/repos/223872088/shield?branch=master)](https://github.styleci.io/repos/223872088)
+<!-- [![Codacy Badge](https://api.codacy.com/project/badge/Grade/989042d96d2b42b28d98c0c098bceeef)](https://app.codacy.com/app/EDDYMENS/awe-html-kit?utm_source=github.com&utm_medium=referral&utm_content=EDDYMENS/awe-html-kit&utm_campaign=Badge_Grade_Dashboard) -->
+
+[![StyleCI](https://github.styleci.io/repos/223872088/shield?branch=master)](https://github.styleci.io/repos/223872088)
 
 The AWE PHP SDK is a PHP wrapper for the blacklabel API offering of  [AWEmpire API](http://awempire.com).
 

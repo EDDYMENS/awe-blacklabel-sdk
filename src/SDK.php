@@ -198,14 +198,6 @@ class SDK
     /**
      * Get chatScript.
      *
-<<<<<<< HEAD
-     * @param  string  $performerName
-     * @param  string  $containerId
-     * @param  string  (optional) $primaryButtonBg
-     * @param  string  (optional) $primaryButtonColor
-     * @param  string  (optional) $inputBg
-     * @param  string  (optional) $inputColor
-=======
      * @param string             $performerName
      * @param string             $containerId
      * @param string  (optional) $primaryButtonBg
@@ -213,7 +205,6 @@ class SDK
      * @param string (optional)  $inputBg
      * @param string (optional)  $inputColor
      *
->>>>>>> 477bb0eaf51d6f570c7dfef79b5776f29c526465
      * @return array
      */
     public function getChatScript($performerName, $containerId, $primaryButtonBg = null, $primaryButtonColor = null, $inputBg = null, $inputColor = null)

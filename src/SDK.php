@@ -282,13 +282,13 @@ class SDK
 
         if ($err) {
             throw new \Exception('Unable to perform CURL request '.$err);
-        } else {
-            $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
-            $responseObj = json_decode($payload, true);
-            $responseObj['sessionId'] = $sessionId;
+        } 
+        $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
+        $responseObj = json_decode($payload, true);
+        $responseObj['sessionId'] = $sessionId;
 
-            return $responseObj;
-        }
+        return $responseObj;
+        
         curl_close($curl);
     }
 }

@@ -286,8 +286,8 @@ class SDK
         $responseObj = json_decode($payload, true);
         $responseObj['sessionId'] = $sessionId;
 
-        return $responseObj;
-
         curl_close($curl);
+
+        return $responseObj;
     }
 }

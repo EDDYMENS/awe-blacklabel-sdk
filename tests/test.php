@@ -32,10 +32,13 @@ class test extends TestCase
 
     public function setUp()
     {
+        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+        
         $this->config = [
-            'applicationSecret'=>'SXQe*y6PLTV*M#C68h-e8Xj4F_59U^y@', 
-             'userAgent'=>'Gecko',
-             'whiteLabelURL'=>'https://www.eddymens.lsl.com', 
+            'applicationSecret'=> getenv('SECRET'), 
+             'userAgent'=> 'Gecko',
+             'whiteLabelURL'=> getenv('URL'), 
              'clientIP' => '167.71.32.188'
            ];
         $this->SDKInstance = new SDK($this->config);
@@ -54,7 +57,7 @@ class test extends TestCase
     {
         $performer = $this
             ->SDKInstance
-            ->getPerformers(['pageSize'           => 4, 'category'           => 'girls']);
+            ->getPerformers(['pageSize'=> 4, 'category'=> 'girls']);
 
         $output = $this
             ->SDKInstance
@@ -67,7 +70,8 @@ class test extends TestCase
     {
         $output = $this
             ->SDKInstance
-            ->getPerformerAlbum('PrivateObsession', ['type' => 'image', 'privacy' => 'exclusive']);
+            ->getPerformerAlbum('PrivateObsession', 
+                ['type' => 'image', 'privacy' => 'exclusive']);
 
         return $this->assertTrue($output['data']['albums'][0]['isLocked']);
     }

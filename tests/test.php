@@ -33,12 +33,11 @@ class test extends TestCase
     public function setUp()
     {
         $this->config = [
-            'clientIP'         => '104.198.14.52',
-            'applicationSecret'=> 'secret goes here',
-            'userAgent'        => 'Gecko',
-            'language'         => 'en',
-            'whiteLabelURL'    => 'URL goes here',
-          ];
+            'applicationSecret'=>'SXQe*y6PLTV*M#C68h-e8Xj4F_59U^y@', 
+             'userAgent'=>'Gecko',
+             'whiteLabelURL'=>'https://www.eddymens.lsl.com', 
+             'clientIP' => '167.71.32.188'
+           ];
         $this->SDKInstance = new SDK($this->config);
     }
 

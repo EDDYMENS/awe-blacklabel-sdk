@@ -29,7 +29,7 @@ class SDK
         $this->clientIP = $config['clientIP'];
         $this->userAgent = $config['userAgent'];
         $this->whiteLabelURL = $config['whiteLabelURL'];
-        $this->language = $config['language'] ? $config['language'] : 'en';
+        $this->language = (isset($config['language'])) ? $config['language'] : 'en';
     }
 
     /**

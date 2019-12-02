@@ -50,7 +50,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->getPerformerAlbum('PrivateObsession', ['type' => 'image', 'privacy' => 'exclusive']);
+            $response = $SDKInstance->getPerformerDetailsByName('MaiRare');
 ```
 ### getPerformerAlbum
 Get album content of a model. 
@@ -58,7 +58,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->getPerformerDetailsByName('PrivateObsession');
+            ->getPerformerAlbum('PrivateObsession', ['type' => 'image', 'privacy' => 'exclusive']);
 ```
 ### getPerformerVideos
 Get video only content of model 
@@ -146,6 +146,7 @@ EG:
 ```
 ## Run test
 - cd src 
+- $ cp tests/.env-example tests/.env (Change credentials)
 - ./vendor/phpunit/phpunit/phpunit  tests/test.php
 ## TODO
 - Add puchase method

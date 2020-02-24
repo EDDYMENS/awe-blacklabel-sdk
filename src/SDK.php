@@ -71,14 +71,14 @@ class SDK
     /**
      * Performer list pagination.
      *
-     * @param string $name
+     * @param string $name  
      * @param array  $params
      *
      * @return array
      */
     public function getPerformerAlbum($name, $params)
     {
-        return $this->requestProcessor('performers/'.$name.'/albums', 'GET', $params);
+        return $this->requestProcessor('performers/'.$name.'/albums', 'GET', []);
     }
 
     /**
@@ -263,6 +263,7 @@ class SDK
         $memberRoute = ($userType == 'm') ? '/member' : '';
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
+        // var_dump($URL);die;
         curl_setopt_array($curl, [
             CURLOPT_URL            => $URL,
             CURLOPT_RETURNTRANSFER => true,
@@ -276,6 +277,7 @@ class SDK
             CURLOPT_HEADER         => 1, ]
         );
         $response = curl_exec($curl);
+        // var_dump($response);die;
         list($headers, $payload) = explode("\r\n\r\n", $response, 2);
         $err = curl_error($curl);
 
@@ -284,10 +286,9 @@ class SDK
         }
         $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
         $responseObj = json_decode($payload, true);
-        $responseObj['sessionId'] = $sessionId;
+        $responseObj['sessionId'] = (!isset($responseObj['errors']))? $sessionId: null;
 
         curl_close($curl);
-
         return $responseObj;
     }
 }

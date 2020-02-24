@@ -78,7 +78,11 @@ class SDK
      */
     public function getPerformerAlbum($name, $params)
     {
-        return $this->requestProcessor('performers/'.$name.'/albums', 'GET', $params);
+        if(!isset($params['type'])) {
+            return ['error'=>'Please be sure to set content type ie: image or video'];
+        }
+        $type = ($params['type'] == 'video') ? 'videos': 'image';
+        return $this->requestProcessor('performers/'.$name.'/'.$type, 'GET', $params);
     }
 
     /**

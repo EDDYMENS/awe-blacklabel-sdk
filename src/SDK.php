@@ -290,9 +290,10 @@ class SDK
         }
         $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
         $responseObj = json_decode($payload, true);
-        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId: null;
+        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId : null;
 
         curl_close($curl);
+
         return $responseObj;
     }
 }

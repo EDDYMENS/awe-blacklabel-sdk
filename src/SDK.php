@@ -71,14 +71,14 @@ class SDK
     /**
      * Performer list pagination.
      *
-     * @param string $name  
+     * @param string $name
      * @param array  $params
      *
      * @return array
      */
     public function getPerformerAlbum($name, $params)
     {
-        return $this->requestProcessor('performers/'.$name.'/albums', 'GET', []);
+        return $this->requestProcessor('performers/'.$name.'/albums', 'GET', $params);
     }
 
     /**
@@ -286,7 +286,7 @@ class SDK
         }
         $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
         $responseObj = json_decode($payload, true);
-        $responseObj['sessionId'] = (!isset($responseObj['errors']))? $sessionId: null;
+        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId: null;
 
         curl_close($curl);
         return $responseObj;

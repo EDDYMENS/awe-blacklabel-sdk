@@ -37,10 +37,10 @@ class test extends TestCase
 
         $this->config = [
             'applicationSecret'=> getenv('SECRET'),
-             'userAgent'       => 'Gecko',
-             'whiteLabelURL'   => getenv('URL'),
-             'clientIP'        => '167.71.32.188',
-           ];
+            'userAgent'        => 'Gecko',
+            'whiteLabelURL'    => getenv('URL'),
+            'clientIP'         => '167.71.32.188',
+        ];
         $this->SDKInstance = new SDK($this->config);
     }
 

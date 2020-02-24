@@ -78,11 +78,7 @@ class SDK
      */
     public function getPerformerAlbum($name, $params)
     {
-        if(!isset($params['type'])) {
-            return ['error'=>'Please be sure to set content type ie: image or video'];
-        }
-        $type = ($params['type'] == 'video') ? 'videos': 'image';
-        return $this->requestProcessor('performers/'.$name.'/'.$type, 'GET', $params);
+        return $this->requestProcessor('performers/'.$name.'/albums', 'GET', $params);
     }
 
     /**
@@ -290,10 +286,9 @@ class SDK
         }
         $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
         $responseObj = json_decode($payload, true);
-        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId : null;
+        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId: null;
 
         curl_close($curl);
-
         return $responseObj;
     }
 }

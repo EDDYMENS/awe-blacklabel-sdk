@@ -95,7 +95,7 @@ class SDK
     }
 
     /**
-     * Performer list pagination.
+     * Get Album Items.
      *
      * @param string $performerName
      * @param string $albumID
@@ -130,9 +130,21 @@ class SDK
      */
     public function purchaseAlbum($performerNick, $albumID)
     {
-        return $this->requestProcessor('purchases/video', 'POST', ['performerNick' => $performerNick, 'id' => $albumID]);
+        return $this->requestProcessor('purchases/album', 'POST', ['performerNick' => $performerNick, 'id' => $albumID]);
     }
 
+    /**
+     * Purchase exclusive performer videos.
+     *
+     * @param string $performerNick
+     * @param string $albumID
+     *
+     * @return array
+     */
+    public function purchaseVideo($performerNick, $albumID)
+    {
+        return $this->requestProcessor('purchases/video', 'POST', ['performerNick' => $performerNick, 'id' => $albumID]);
+    }
     /**
      * Get the entire filter list for sorting performers.
      *

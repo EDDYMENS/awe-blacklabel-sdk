@@ -32,7 +32,7 @@ EG:
 ```PHP
 $output = $this
             ->SDKInstance
-            ->getPerformers(['pageSize' => 10, 'category' => 'girls']);
+              ->getPerformers(['pageSize' => 10, 'category' => 'girls']);
 
 ```
 ### getMorePerformers
@@ -41,7 +41,7 @@ EG:
 ```PHP
 $output = $this
             ->SDKInstance
-            ->getMorePerformers($performer['data']['listPageId']);
+              ->getMorePerformers($performer['data']['listPageId']);
 ```
 
 ### getPerformerDetailsByName
@@ -50,7 +50,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            $response = $SDKInstance->getPerformerDetailsByName('MaiRare');
+              ->getPerformerDetailsByName('MaiRare');
 ```
 ### getPerformerAlbum
 Get album content of a model. 
@@ -58,7 +58,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->getPerformerAlbum('PrivateObsession', ['type' => 'image', 'privacy' => 'exclusive']);
+              ->getPerformerAlbum('PrivateObsession', ['type' => 'image', 'privacy' => 'exclusive']);
 ```
 ### getPerformerVideos
 Get video only content of model 
@@ -72,7 +72,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->getAlbumItem('PrivateObsession', '5c897e0136b31ae756dc3afd');
+              ->getAlbumItem('PrivateObsession', '5c897e0136b31ae756dc3afd');
 ```
 ### generalSearch
 Search for models. 
@@ -80,7 +80,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->generalSearch('adeleB');
+              ->generalSearch('adeleB');
 ```
 ### getFilterList
 Get list of categories and filters 
@@ -88,7 +88,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->getFilterList();
+              ->getFilterList();
 ```
 ### setLanguage
 Change the language for data sent back 
@@ -96,7 +96,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->setLanguage('fr');
+              ->setLanguage('fr');
 ```
 ### refreshSession
 Refresh and reuse an expired session. 
@@ -104,7 +104,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->refreshSession('<session goes here>');
+              ->refreshSession('<session goes here>');
 ```
 ### setSession
 For requests where member sessions are required like the updateUser method
@@ -113,14 +113,14 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->setSession('<session goes here>');
+             ->setSession('<session goes here>');
 ```
 ### getPerformerRecommendations
 EG: 
 ```PHP 
  $output = $this
             ->SDKInstance
-            ->getPerformerRecommendations('girls');
+              ->getPerformerRecommendations('girls');
 ```
 ### authenticateUser
 Authenticate user and get back a purchase URL.
@@ -128,7 +128,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->authenticateUser(['partnerUserId' => '101', 'displayName' => 'John Doe', 'email' => 'test@test.com']);
+              ->authenticateUser(['partnerUserId' => '101', 'displayName' => 'John Doe', 'email' => 'test@test.com']);
 ```
 ### updateUser
 Update a member users profile. 
@@ -136,7 +136,7 @@ EG:
 ```PHP 
 $output = $this
             ->SDKInstance
-            ->updateUser(['partnerUserId' => '8689', 'displayName' => 'John Doe', 'email' => 'test@test.com']);
+             ->updateUser(['partnerUserId' => '8689', 'displayName' => 'John Doe', 'email' => 'test@test.com']);
 ```
 ### getChatScript
 EG: 

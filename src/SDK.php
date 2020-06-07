@@ -117,7 +117,7 @@ class SDK
      */
     public function generalSearch($category, $searchText = '')
     {
-        return $this->requestProcessor('auto-suggest', 'GET', ['category' => $category, 'searchText' => $category]);
+        return $this->requestProcessor('auto-suggest', 'GET', ['category' => $category, 'searchText' => $searchText]);
     }
 
     /**

@@ -145,6 +145,7 @@ class SDK
     {
         return $this->requestProcessor('purchases/video', 'POST', ['performerNick' => $performerNick, 'id' => $albumID]);
     }
+
     /**
      * Get the entire filter list for sorting performers.
      *
@@ -276,17 +277,19 @@ class SDK
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL            => $URL,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING       => '',
-            CURLOPT_MAXREDIRS      => 10,
-            CURLOPT_TIMEOUT        => 30,
-            CURLOPT_POSTFIELDS     => json_encode($params),
-            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST  => strtoupper($method),
-            CURLOPT_HTTPHEADER     => $headers,
-            CURLOPT_HEADER         => 1, ]
+        curl_setopt_array(
+            $curl,
+            [
+                CURLOPT_URL            => $URL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING       => '',
+                CURLOPT_MAXREDIRS      => 10,
+                CURLOPT_TIMEOUT        => 30,
+                CURLOPT_POSTFIELDS     => json_encode($params),
+                CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST  => strtoupper($method),
+                CURLOPT_HTTPHEADER     => $headers,
+                CURLOPT_HEADER         => 1, ]
         );
         $response = curl_exec($curl);
 
@@ -298,9 +301,10 @@ class SDK
         }
         $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
         $responseObj = json_decode($payload, true);
-        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId: null;
+        $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId : null;
 
         curl_close($curl);
+
         return $responseObj;
     }
 }

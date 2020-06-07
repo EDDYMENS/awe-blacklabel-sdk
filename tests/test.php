@@ -70,8 +70,10 @@ class test extends TestCase
     {
         $output = $this
             ->SDKInstance
-            ->getPerformerAlbum('PrivateObsession',
-                ['type' => 'image', 'privacy' => 'exclusive']);
+            ->getPerformerAlbum(
+                'PrivateObsession',
+                ['type' => 'image', 'privacy' => 'exclusive']
+            );
 
         return $this->assertTrue($output['data']['albums'][0]['isLocked']);
     }

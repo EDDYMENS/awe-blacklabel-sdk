@@ -275,7 +275,7 @@ class SDK
         $memberRoute = ($userType == 'm') ? '/member' : '';
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
-        // var_dump($URL);die;
+
         curl_setopt_array($curl, [
             CURLOPT_URL            => $URL,
             CURLOPT_RETURNTRANSFER => true,
@@ -289,7 +289,7 @@ class SDK
             CURLOPT_HEADER         => 1, ]
         );
         $response = curl_exec($curl);
-        // var_dump($response);die;
+
         list($headers, $payload) = explode("\r\n\r\n", $response, 2);
         $err = curl_error($curl);
 

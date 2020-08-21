@@ -193,6 +193,18 @@ class SDK
         return $this->requestProcessor('users', 'POST', $payload);
     }
 
+        /**
+     * Get login user details.
+     *
+     * @param array $payload
+     *
+     * @return array
+     */
+    public function getUserDetails()
+    {
+        return $this->requestProcessor('user-details', 'GET', []);
+    }
+
     /**
      * update user.
      *
@@ -272,10 +284,11 @@ class SDK
             $headers[] = 'X-Session-Id: '.$finalSessionId;
             $userType = substr($finalSessionId, 0, 1);
         }
-        $memberRoute = ($userType == 'm') ? '/member' : '';
+        $defaultPath = ($urlPartial == 'users')? '/auth' : '';
+        $memberRoute = ($userType == 'm') ? '/auth/member' : $defaultPath;
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
-        // var_dump($URL);die;
+
         curl_setopt_array($curl, [
             CURLOPT_URL            => $URL,
             CURLOPT_RETURNTRANSFER => true,
@@ -289,14 +302,16 @@ class SDK
             CURLOPT_HEADER         => 1, ]
         );
         $response = curl_exec($curl);
-        // var_dump($response);die;
+
         list($headers, $payload) = explode("\r\n\r\n", $response, 2);
         $err = curl_error($curl);
 
         if ($err) {
             throw new \Exception('Unable to perform CURL request '.$err);
         }
-        $sessionId = explode(': ', explode("\r\n", $headers)[6])[1];
+
+        $sessionIndex = ($urlPartial == 'users') ? 5 : 6;
+        $sessionId = explode(': ', explode("\r\n", $headers)[$sessionIndex])[1];
         $responseObj = json_decode($payload, true);
         $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId: null;
 

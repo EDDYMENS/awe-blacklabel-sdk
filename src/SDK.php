@@ -117,7 +117,7 @@ class SDK
      */
     public function generalSearch($category, $searchText = '')
     {
-        return $this->requestProcessor('auto-suggest', 'GET', ['category' => $category, 'searchText' => $category]);
+        return $this->requestProcessor('auto-suggest', 'GET', ['category' => $category, 'searchText' => $searchText]);
     }
 
     /**
@@ -269,6 +269,17 @@ class SDK
         return $this;
     }
 
+    private function getHeader($responseHeaders, $headerKey)
+    {
+        $headerList = explode("\r\n", $responseHeaders);
+        foreach($headerList as $header) {
+            if(strpos($header, $headerKey) !== false) {
+                return explode(': ', $header)[1];
+            }
+        }
+        return null;
+    }
+
     private function requestProcessor($urlPartial, $method, $params = [], $sessionId = null)
     {
         $finalSessionId = ($sessionId) ? $sessionId : $this->sessionId;
@@ -285,13 +296,14 @@ class SDK
             $userType = substr($finalSessionId, 0, 1);
         }
         $defaultPath = ($urlPartial == 'users')? '/auth' : '';
-        $memberRoute = ($userType == 'm') ? '/auth/member' : $defaultPath;
+        $memberRoute = ($userType == 'm' && $urlPartial == 'users') ? '/auth/member' : $defaultPath;
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
-
+        // die($URL);
         curl_setopt_array($curl, [
             CURLOPT_URL            => $URL,
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING       => '',
             CURLOPT_MAXREDIRS      => 10,
             CURLOPT_TIMEOUT        => 30,
@@ -302,16 +314,16 @@ class SDK
             CURLOPT_HEADER         => 1, ]
         );
         $response = curl_exec($curl);
-
-        list($headers, $payload) = explode("\r\n\r\n", $response, 2);
+        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $responseHeaders = substr($response, 0, $header_size);
+        $payload = substr($response, $header_size);
         $err = curl_error($curl);
 
         if ($err) {
             throw new \Exception('Unable to perform CURL request '.$err);
         }
 
-        $sessionIndex = ($urlPartial == 'users') ? 5 : 6;
-        $sessionId = explode(': ', explode("\r\n", $headers)[$sessionIndex])[1];
+        $sessionId = $this->getHeader($responseHeaders, 'X-Session-Id');
         $responseObj = json_decode($payload, true);
         $responseObj['sessionId'] = (!isset($responseObj['errors'])) ? $sessionId: null;
 

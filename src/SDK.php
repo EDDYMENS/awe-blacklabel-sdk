@@ -297,9 +297,9 @@ class SDK
         }
         $defaultPath = ($urlPartial == 'users')? '/auth' : '';
         $memberRoute = ($userType == 'm' && $urlPartial == 'users') ? '/auth/member' : $defaultPath;
+        $memberRoute = ($userType == 'm' && $urlPartial != 'users') ? '/member' : $defaultPath;
         $lang = $this->language;
         $URL = "$this->whiteLabelURL/$lang$memberRoute/api/v1/$urlPartial?".$queryParams;
-        // die($URL);
         curl_setopt_array($curl, [
             CURLOPT_URL            => $URL,
             CURLOPT_RETURNTRANSFER => true,
